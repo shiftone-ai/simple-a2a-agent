@@ -22,6 +22,9 @@ jobs:
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
 
       - name: Configure Cachix
         if: ${{ vars.CACHIX_CACHE_NAME != '' }}
@@ -33,4 +36,4 @@ jobs:
           skipPush: ${{ github.event_name == 'pull_request' || secrets.CACHIX_AUTH_TOKEN == '' }}
 
       - name: Run devenv tests
-        run: devenv test
+        run: nix run github:cachix/devenv/latest -- test
