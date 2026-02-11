@@ -10,6 +10,7 @@ inputs:
 cachix:
   enable: true
   caches:
+    - shiftone-ai-simple-a2a-agent
     - nixpkgs-python
     - devenv
     - nix-community
