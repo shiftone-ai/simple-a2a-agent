@@ -1,0 +1,24 @@
+{
+  "include": ["src", "tests"],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/migrations",
+    ".venv",
+    "venv"
+  ],
+  "pythonVersion": "3.12",
+  "pythonPlatform": "All",
+  "venvPath": ".",
+  "venv": ".venv",
+  "typeCheckingMode": "standard",
+  "reportUnusedImport": "warning",
+  "reportUnusedVariable": "warning",
+  "reportUnusedFunction": "warning",
+  "reportOptionalMemberAccess": "warning",
+  "reportGeneralTypeIssues": "warning",
+  "reportUnknownMemberType": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownVariableType": false,
+  "reportAny": false
+}

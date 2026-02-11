@@ -1,0 +1,36 @@
+name: Nix Cache
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  devenv-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Configure Cachix
+        if: ${{ vars.CACHIX_CACHE_NAME != '' }}
+        uses: cachix/cachix-action@v16
+        with:
+          name: ${{ vars.CACHIX_CACHE_NAME }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          # Fork PRs cannot access secrets. Read-only mode still allows cache pulls.
+          skipPush: ${{ github.event_name == 'pull_request' || secrets.CACHIX_AUTH_TOKEN == '' }}
+
+      - name: Run devenv tests
+        run: devenv test
