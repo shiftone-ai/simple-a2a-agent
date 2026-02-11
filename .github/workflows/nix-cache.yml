@@ -43,5 +43,5 @@ jobs:
       - name: Install devenv
         run: nix profile install nixpkgs#devenv
 
-      - name: Verify devenv setup
-        run: devenv info
+      - name: Verify devenv binary
+        run: devenv version
