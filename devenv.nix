@@ -10,7 +10,8 @@
   # Python configuration
   languages.python = {
     enable = true;
-    version = "3.12";
+    package = pkgs.python312;
+    venv.enable = true;
     uv = {
       enable = true;
       sync.enable = true;
@@ -39,23 +40,25 @@
 
   # Shell initialization
   enterShell = ''
-    echo ""
-    echo "Python Development Environment"
-    echo "=============================="
-    echo "Python: $(python --version)"
-    echo "uv: $(uv --version)"
-    echo ""
-    echo "Tools:"
-    echo "  ruff: $(ruff --version)"
-    echo "  basedpyright: $(basedpyright --version)"
-    echo ""
-    echo "Commands:"
-    echo "  uv sync          - Install dependencies"
-    echo "  uv add <pkg>     - Add dependency"
-    echo "  ruff check .     - Run linter"
-    echo "  ruff format .    - Format code"
-    echo "  basedpyright     - Type check"
-    echo "  treefmt          - Format all files"
-    echo ""
+    if [[ -z "''${DIRENV_IN_ENVRC:-}" ]]; then
+      echo ""
+      echo "Python Development Environment"
+      echo "=============================="
+      echo "Python: $(python --version)"
+      echo "uv: $(uv --version)"
+      echo ""
+      echo "Tools:"
+      echo "  ruff: $(ruff --version)"
+      echo "  basedpyright: $(basedpyright --version)"
+      echo ""
+      echo "Commands:"
+      echo "  uv sync          - Install dependencies"
+      echo "  uv add <pkg>     - Add dependency"
+      echo "  ruff check .     - Run linter"
+      echo "  ruff format .    - Format code"
+      echo "  basedpyright     - Type check"
+      echo "  treefmt          - Format all files"
+      echo ""
+    fi
   '';
 }
